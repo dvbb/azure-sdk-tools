@@ -18,6 +18,9 @@ param(
     [switch] $CI = ($null -ne $env:SYSTEM_TEAMPROJECTID)
 )
 
+
+Write-Host "HHHHHHHHHHH"
+
 $ErrorActionPreference = 'Stop'
 
 . $PSScriptRoot/find-all-stress-packages.ps1
@@ -83,6 +86,7 @@ function DeployStressTests(
     [string]$deployId = 'local',
     [string]$subscription = 'Azure SDK Developer Playground'
 ) {
+    Write-Host "asdfasdfasdf"
     if ($PSCmdlet.ParameterSetName -eq 'DoLogin') {
         Login $subscription $clusterGroup $pushImages
     }
@@ -186,6 +190,7 @@ function DeployStressPackage(
 
 function CheckDependencies()
 {
+    Write-Host "asdf2"
     $deps = @(
         @{
             Command = "docker";
@@ -214,15 +219,20 @@ function CheckDependencies()
             Write-Error $dep.Help
         }
     }
-
+    Write-Host "asdf3"
     if ($shouldError) {
         exit 1
     }
 
 }
 
+
 # Don't call functions when the script is being dot sourced
 if ($MyInvocation.InvocationName -ne ".") {
+    Write-Host "zzzz"
     CheckDependencies
+    Write-Host "xxxx"
     DeployStressTests @PSBoundParameters
 }
+Write-Host $($MyInvocation.InvocationName)
+Write-Host "yyyy"

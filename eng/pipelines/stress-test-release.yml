@@ -65,7 +65,7 @@ jobs:
       parameters:
         Repositories:
           - Name: $(Repository)
-            Commitish: ${{ parameters.DeployFromBranchOrCommit }}
+            Commitish: albertcheng/stress-pipeline
             WorkingDirectory: $(System.DefaultWorkingDirectory)/$(Repository)
         Paths:
           - '/*'
@@ -79,9 +79,18 @@ jobs:
       continueOnError: true
 
     - task: AzureCLI@2
+      displayName: test cli
+      inputs:
+        azureSubscription: ${{ parameters.Subscription }}
+        powerShellErrorActionPreference: stop
+        scriptType: pscore
+        scriptPath: $(System.DefaultWorkingDirectory)/$(Repository)/eng/common/scripts/stress-testing/testing.ps1
+
+    - task: AzureCLI@2
       displayName: Build and Deploy Stress Tests
       inputs:
         azureSubscription: ${{ parameters.Subscription }}
+        powerShellErrorActionPreference: stop
         scriptType: pscore
         scriptPath: $(System.DefaultWorkingDirectory)/$(Repository)/eng/common/scripts/stress-testing/deploy-stress-tests.ps1
         arguments:
