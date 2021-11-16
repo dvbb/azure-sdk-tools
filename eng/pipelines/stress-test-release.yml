@@ -73,6 +73,11 @@ jobs:
           - '!sdk/**/session-records'
           - '!sdk/**/SessionRecords'
 
+    - pwsh: |
+        tree '$(System.DefaultWorkingDirectory)/$(Repository)' /F
+      displayName: testing
+      continueOnError: true
+
     - task: AzureCLI@2
       displayName: Build and Deploy Stress Tests
       inputs:
