@@ -19,5 +19,6 @@ param(
 )
 
 . $PSScriptRoot/stress-test-deployment-lib.ps1
+
 CheckDependencies
 DeployStressTests @PSBoundParameters

@@ -77,7 +77,6 @@ jobs:
       displayName: Build and Deploy Stress Tests
       inputs:
         azureSubscription: ${{ parameters.Subscription }}
-        powerShellErrorActionPreference: stop
         scriptType: pscore
         scriptPath: $(System.DefaultWorkingDirectory)/$(Repository)/eng/common/scripts/stress-testing/deploy-stress-tests.ps1
         arguments:
