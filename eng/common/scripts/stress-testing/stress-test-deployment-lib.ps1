@@ -1,4 +1,3 @@
-[CmdletBinding(DefaultParameterSetName = 'Default')]
 param(
     [string]$SearchDirectory,
     [hashtable]$Filters,
@@ -214,6 +213,7 @@ function CheckDependencies()
             Write-Error $dep.Help
         }
     }
+
     if ($shouldError) {
         exit 1
     }
