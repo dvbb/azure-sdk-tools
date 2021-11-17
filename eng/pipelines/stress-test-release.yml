@@ -73,19 +73,6 @@ jobs:
           - '!sdk/**/session-records'
           - '!sdk/**/SessionRecords'
 
-    - pwsh: |
-        tree '$(System.DefaultWorkingDirectory)/$(Repository)' /F
-      displayName: testing
-      continueOnError: true
-
-    - task: AzureCLI@2
-      displayName: test cli
-      inputs:
-        azureSubscription: ${{ parameters.Subscription }}
-        powerShellErrorActionPreference: stop
-        scriptType: pscore
-        scriptPath: $(System.DefaultWorkingDirectory)/$(Repository)/eng/common/scripts/stress-testing/testing.ps1
-
     - task: AzureCLI@2
       displayName: Build and Deploy Stress Tests
       inputs:
